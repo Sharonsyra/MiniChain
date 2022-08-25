@@ -50,7 +50,7 @@ class FastBlockchain(chain: ArrayBuffer[Block] = ArrayBuffer[Block](Genesis)) ex
   }
 
   def findByHash(hash: Hash): Option[Block] = {
-    chain.find(block => block.cryptoHash == hash)
+    chain.find(block => block.cryptoHash.toNumber == hash.toNumber)
   }
 
   // Checks if the two chains have the same common ancestor. Used to test for forks

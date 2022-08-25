@@ -5,8 +5,20 @@ import org.scalatest.OptionValues
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+import scala.collection.mutable.ArrayBuffer
+
 class FastBlockChainSpec extends AnyWordSpec with Matchers with OptionValues {
-  val chain: FastBlockchain = new FastBlockchain()
+  val chain: FastBlockchain = new FastBlockchain(
+    ArrayBuffer[Block](
+      Block(
+        index = 0,
+        parentHash = Sha256.Zero_Hash,
+        transactions = Seq(Transaction("Test Transaction")),
+        miningTargetNumber = -1,
+        nonce = -1
+      )
+    )
+  )
 
   "The FastBlockChain" should {
     "have a Genesis record when instantiated" in {
@@ -20,8 +32,8 @@ class FastBlockChainSpec extends AnyWordSpec with Matchers with OptionValues {
         index = 1,
         parentHash = genesisBlock.value.cryptoHash,
         transactions = Seq(Transaction("Test Transaction 2")),
-        miningTargetNumber = Miner.StdMiningTargetNumber,
-        nonce = Miner.targetByLeadingZeros(3).toLong
+        miningTargetNumber = -1,
+        nonce = -1
       )
       chain.append(secondBlock)
       secondBlock.parentHash.toNumber shouldBe genesisBlock.value.cryptoHash.toNumber
@@ -34,8 +46,8 @@ class FastBlockChainSpec extends AnyWordSpec with Matchers with OptionValues {
           index = 3,
           parentHash = genesisBlock.value.cryptoHash,
           transactions = Seq(Transaction("Test Transaction fail")),
-          miningTargetNumber = Miner.StdMiningTargetNumber,
-          nonce = Miner.targetByLeadingZeros(3).toLong
+          miningTargetNumber = -1,
+          nonce = -1
         )
         chain.append(secondBlock)
       }

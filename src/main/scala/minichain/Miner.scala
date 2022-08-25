@@ -3,6 +3,7 @@ package minichain
 import minichain.Base.{Bytes, Hash, Transaction}
 
 import scala.annotation.tailrec
+import scala.util.Random
 
 object Miner {
   // NOTE: A Hash is also a Number, we use the two interchangeably.
@@ -11,7 +12,7 @@ object Miner {
   // than a given target number.
   // This target serves, in a way, as the maximum possible number that a
   // proof of work computation should produce.
-  final val StdMiningTargetNumber = targetByLeadingZeros(1)
+  final val StdMiningTargetNumber: BigInt = targetByLeadingZeros(1)
 
   // Whoa! We actually mine the Genesis block.
   // Normally, this is done by the system during bootstrapping
@@ -79,7 +80,7 @@ object Miner {
       else findNonce(currentNonce + 1)
     }
 
-    val nonce = findNonce(0L)
+    val nonce: Long = findNonce(Random.nextLong())
     Block(index, parentHash, transactions, miningTargetNumber, nonce)
   }
 }

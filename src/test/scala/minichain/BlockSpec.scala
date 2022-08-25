@@ -10,8 +10,8 @@ class BlockSpec extends AnyWordSpec with Matchers {
       index = 0,
       parentHash = Sha256.Zero_Hash,
       transactions = Seq(Transaction("Test Transaction")),
-      miningTargetNumber = Miner.StdMiningTargetNumber,
-      nonce = Miner.targetByLeadingZeros(1).toLong
+      miningTargetNumber = -1,
+      nonce = -1
     )
   "The Block" should {
     "return a hash object successfully" in {
