@@ -1,3 +1,5 @@
+package minichain
+
 object Base {
   // When you see Unknown, replace it with appropriate type on a per
   // case basis. So if you see:

@@ -1,4 +1,6 @@
-import Base.{Bytes, Hash}
+package minichain
+
+import minichain.Base.{Bytes, Hash}
 
 import java.security.MessageDigest
 

@@ -1,5 +1,7 @@
-import Base.{Hash, Nonce, Transaction}
-import Sha256.TheDigest
+package minichain
+
+import minichain.Base.{Hash, Nonce, Transaction}
+import minichain.Sha256.TheDigest
 
 // Now we are ready to describe the Block.
 // Every block has an index, starting from zero (0).
@@ -20,6 +22,6 @@ case class Block(
 
   // The essence of PoW is that it is a problem whose solution is easy
   // (in computational resources) to verify but difficult to find.
-  def verifyThisHasBeenMinedProperly(): Boolean =
-    cryptoHash.toNumber < miningTargetNumber
+  def verifyThisHasBeenMinedProperly(): Unit =
+    assert(cryptoHash.toNumber < miningTargetNumber.longValue())
 }
